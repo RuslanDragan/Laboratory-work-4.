@@ -86,6 +86,6 @@
         }
       },
       "required": ["device_id", "Marker", "Calibration_Zone", "Target_Output"]
-    }
+    
   
   "required": ["AR_Slider_State"]
