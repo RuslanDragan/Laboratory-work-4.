@@ -1,1 +1,91 @@
-12345
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "AR-Slider Controller Data Schema",
+  "description": "Фізична схема JSON для передачі стану AR-слайдера",
+  "type": "object",
+  "properties": {
+    "AR_Slider_State": {
+      "type": "object",
+      "description": "Головний ієрархічний вузол стану системи",
+      "properties": {
+        "device_id": {
+          "type": "string",
+          "description": "Унікальний ідентифікатор пристрою/камери",
+          "pattern": "^CAM-[0-9]{3}$"
+        },
+        "Marker": {
+          "type": "object",
+          "description": "Дані про відстежуваний AR-маркер",
+          "properties": {
+            "marker_type": {
+              "type": "text",
+              "description": "Тип маркера (обмеження через регулярний вираз)",
+              "pattern": "^(Aruco|QR)$"
+            },
+            "recognized_status": {
+              "type": "boolean",
+              "description": "Поточний стан захоплення маркера вебкамерою"
+            },
+            "position_X": {
+              "type": "number",
+              "description": "Лінійна координата X у просторі",
+              "minimum": 0
+            },
+            "position_Y": {
+              "type": "number",
+              "description": "Лінійна координата Y у просторі",
+              "minimum": 0
+            }
+          },
+          "required": ["marker_type", "recognized_status", "position_X", "position_Y"]
+        },
+        "Calibration_Zone": {
+          "type": "object",
+          "description": "Дані налаштованої робочої зони",
+          "properties": {
+            "start_point_X": {
+              "type": "number",
+              "description": "Мінімальне положення маркера X",
+              "minimum": 0
+            },
+            "start_point_Y": {
+              "type": "number",
+              "description": "Мінімальне положення маркера Y",
+              "minimum": 0
+            },
+            "end_point_X": {
+              "type": "number",
+              "description": "Максимальне положення маркера X",
+              "minimum": 0.1
+            },
+            "end_point_Y": {
+              "type": "number",
+              "description": "Максимальне положення маркера Y",
+              "minimum": 0.1
+            },
+            "physical_distance": {
+              "type": "number",
+              "description": "Фізична відстань між точками",
+              "minimum": 0.1
+            }
+          },
+          "required": ["start_point_X", "start_point_Y", "end_point_X", "end_point_Y", "physical_distance"]
+        },
+        "Target_Output": {
+          "type": "object",
+          "description": "Вихідні дані для цільової системи (гри/симулятора)",
+          "properties": {
+            "control_value": {
+              "type": "number",
+              "description": "Числове значення для керування системою",
+              "minimum": 0,
+              "maximum": 100
+            }
+          },
+          "required": ["control_value"]
+        }
+      },
+      "required": ["device_id", "Marker", "Calibration_Zone", "Target_Output"]
+    }
+  },
+  "required": ["AR_Slider_State"]
