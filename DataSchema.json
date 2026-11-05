@@ -18,7 +18,7 @@
           "description": "Дані про відстежуваний AR-маркер",
           "properties": {
             "marker_type": {
-              "type": "string",
+              "type": "text",
               "description": "Тип маркера (обмеження через регулярний вираз)",
               "pattern": "^(Aruco|QR)$"
             },
@@ -89,4 +89,3 @@
     }
   },
   "required": ["AR_Slider_State"]
-}
