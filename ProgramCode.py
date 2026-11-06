@@ -1,5 +1,6 @@
-import socket
 import cv2
+import socket
+
 
 print("AR-Slider Controller")
 print(f"OpenCV module version: {cv2.__version__}")
